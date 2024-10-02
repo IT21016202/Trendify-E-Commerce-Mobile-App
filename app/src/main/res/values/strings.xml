@@ -14,4 +14,11 @@
     <string name="loginhere">Login Here</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+
+    <!--Register Page-->
+    <string name="registerhere">Register Here</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="repassword">Re-Enter Password</string>
+
 </resources>

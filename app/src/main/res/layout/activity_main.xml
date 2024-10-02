@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.304" />
 
     <Button
-        android:id="@+id/loginbtn"
+        android:id="@+id/btnToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.606" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnToRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="200dp"
