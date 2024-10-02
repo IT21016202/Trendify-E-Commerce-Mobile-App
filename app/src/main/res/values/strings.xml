@@ -1,12 +1,17 @@
 <resources>
 
-<!-- Welcome Page-->
+    <!-- Welcome Page-->
     <string name="app_name">Trendify</string>
     <string name="welcome">Welcome To</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
 
-<!--Home Page-->
+    <!--Home Page-->
     <string name="allProducts">All Products</string>
     <string name="category">Category</string>
+
+    <!--Login Page-->
+    <string name="loginhere">Login Here</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
