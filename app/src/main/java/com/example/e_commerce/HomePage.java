@@ -30,6 +30,7 @@ public class HomePage extends AppCompatActivity {
         // Trust all certificates for localhost development
         SSLHelper.trustAllCertificates();
 
+
         // Make the API call
         fetchJsonArrayData();
     }
