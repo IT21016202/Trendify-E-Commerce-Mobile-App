@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Cart">
+    tools:context=".Profile">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cart"
-        tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="59dp" />
+        android:text="Profile"
+        tools:layout_editor_absoluteX="190dp"
+        tools:layout_editor_absoluteY="79dp" />
 
     <!-- BottomNavigationView -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

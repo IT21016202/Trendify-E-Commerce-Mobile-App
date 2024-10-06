@@ -9,15 +9,15 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Cart extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_profile);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_cart); // Highlight 'Home' item
+        bottomNavigationView.setSelectedItemId(R.id.nav_profile); // Highlight 'Home' item
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -25,25 +25,25 @@ public class Cart extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if(itemId == R.id.nav_home) {
-                    intent = new Intent(Cart.this, HomePage.class);
+                    intent = new Intent(Profile.this, HomePage.class);
                     startActivity(intent);
                     return true;
                 }
 
                 else if(itemId == R.id.nav_products) {
-                    intent = new Intent(Cart.this, Products.class);
+                    intent = new Intent(Profile.this, Products.class);
                     startActivity(intent);
                     return true;
                 }
 
                 else if(itemId == R.id.nav_cart) {
-                    intent = new Intent(Cart.this, Cart.class);
+                    intent = new Intent(Profile.this, Cart.class);
                     startActivity(intent);
                     return true;
                 }
 
                 else if(itemId == R.id.nav_profile) {
-                    intent = new Intent(Cart.this, Profile.class);
+                    intent = new Intent(Profile.this, Profile.class);
                     startActivity(intent);
                     return true;
                 }
@@ -53,6 +53,5 @@ public class Cart extends AppCompatActivity {
                 }
             }
         });
-
     }
 }

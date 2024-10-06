@@ -1,11 +1,14 @@
 package com.example.e_commerce;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
 import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.MenuItem;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePage extends AppCompatActivity {
 
@@ -37,6 +42,44 @@ public class HomePage extends AppCompatActivity {
 
         // Get Session Data
         getSessionData();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home); // Highlight 'Home' item
+                bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Intent intent;
+                        int itemId = item.getItemId();
+
+                        if(itemId == R.id.nav_home) {
+                    intent = new Intent(HomePage.this, HomePage.class);
+                    startActivity(intent);
+                    return true;
+                }
+
+                else if(itemId == R.id.nav_products) {
+                    intent = new Intent(HomePage.this, Products.class);
+                    startActivity(intent);
+                    return true;
+                }
+
+                else if(itemId == R.id.nav_cart) {
+                    intent = new Intent(HomePage.this, Cart.class);
+                    startActivity(intent);
+                    return true;
+                }
+
+                else if(itemId == R.id.nav_profile) {
+                    intent = new Intent(HomePage.this, Profile.class);
+                    startActivity(intent);
+                    return true;
+                }
+
+                else {
+                    return false;
+                }
+            }
+        });
     }
 
     private void fetchJsonArrayData() {
