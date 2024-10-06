@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Intent;
+import android.util.Patterns;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,8 +20,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
+
 
 public class Login extends AppCompatActivity {
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 simple letter
+                    "(?=.*[A-Z])" +         //at least 1 capital letter
+                    ".{8,}" +               //at least 8 characters
+                    "$");
 
     private Button loginbtn;
     private EditText txtLogEmail, txtLogPassword;
@@ -45,28 +56,30 @@ public class Login extends AppCompatActivity {
     }
 
     private void login(){
-        String userEmail = txtLogEmail.getText().toString();
-        String userPassword = txtLogPassword.getText().toString();
+        if(validateEmail() && validatePassword()){
+            String userEmail = txtLogEmail.getText().toString();
+            String userPassword = txtLogPassword.getText().toString();
 
-        // Create a JSON object for the request body
-        JSONObject jsonBody = new JSONObject();
-        try {
-            jsonBody.put("email", userEmail);
-            jsonBody.put("password", userPassword);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            return;
-        }
+            // Create a JSON object for the request body
+            JSONObject jsonBody = new JSONObject();
+            try {
+                jsonBody.put("email", userEmail);
+                jsonBody.put("password", userPassword);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                return;
+            }
 
-        // Define the URL and the request
-        String url = "https://10.0.2.2:7022/login"; // 10.0.2.2 for emulator to access localhost
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+            // Define the URL and the request
+            String url = "https://10.0.2.2:7022/login"; // 10.0.2.2 for emulator to access localhost
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST, url, jsonBody,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        gotToHome();
                     }
                 },
                 new Response.ErrorListener() {
@@ -94,10 +107,45 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 }
-        );
+            );
 
-        // Add the request to the Volley request queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+            // Add the request to the Volley request queue
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjectRequest);
+        }
+    }
+
+    private void gotToHome(){
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+    }
+
+    public boolean validateEmail(){
+        String userEmail = txtLogEmail.getText().toString();
+        if (userEmail.isEmpty()){
+            txtLogEmail.setError("Field Cannot be Empty !");
+            return false;
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
+            txtLogEmail.setError("Please Enter Valid Email Address !");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public boolean validatePassword(){
+        String userPassword = txtLogPassword.getText().toString();
+
+        if (userPassword.isEmpty() || userPassword.isEmpty()) {
+            txtLogPassword.setError("Fields Cannot be Empty !");
+            return false;
+        }
+        else if (!PASSWORD_PATTERN.matcher(userPassword).matches()){
+            txtLogPassword.setError("Password Must Contain Minimum 8 characters, At least One Digit and At least One Letter");
+            return false;
+        }
+        else
+            return true;
     }
 }
