@@ -70,7 +70,7 @@ public class Register extends AppCompatActivity {
             jsonBody.put("password", password);
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             return;
         }
 

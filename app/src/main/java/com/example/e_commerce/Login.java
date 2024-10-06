@@ -3,12 +3,101 @@ package com.example.e_commerce;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.content.Intent;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class Login extends AppCompatActivity {
+
+    private Button loginbtn;
+    private EditText txtLogEmail, txtLogPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loginbtn = findViewById(R.id.btnLogin);
+        txtLogEmail = findViewById(R.id.txtLogEmail);
+        txtLogPassword = findViewById(R.id.txtLogPassword);
+
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Trust all certificates for localhost development
+                SSLHelper.trustAllCertificates();
+                login();
+            }
+        });
+    }
+
+    private void login(){
+        String userEmail = txtLogEmail.getText().toString();
+        String userPassword = txtLogPassword.getText().toString();
+
+        // Create a JSON object for the request body
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("email", userEmail);
+            jsonBody.put("password", userPassword);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Define the URL and the request
+        String url = "https://10.0.2.2:7022/login"; // 10.0.2.2 for emulator to access localhost
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST, url, jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            try {
+                                // Parse error response as string
+                                String errorResponse = new String(error.networkResponse.data, "utf-8");
+                                try {
+                                    // Try to parse the error response as JSON
+                                    JSONObject jsonError = new JSONObject(errorResponse);
+                                    String message = jsonError.optString("message", "Unknown error");
+                                    Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
+                                } catch (JSONException jsonException) {
+                                    // If it's not JSON, show the raw string
+                                    Toast.makeText(Login.this, errorResponse, Toast.LENGTH_LONG).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(Login.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(Login.this, "Login failed: Network error", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        );
+
+        // Add the request to the Volley request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
     }
 }
