@@ -1,6 +1,8 @@
 package com.example.e_commerce;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,9 @@ public class HomePage extends AppCompatActivity {
 
         // Make the API call
         fetchJsonArrayData();
+
+        // Get Session Data
+        getSessionData();
     }
 
     private void fetchJsonArrayData() {
@@ -77,5 +82,16 @@ public class HomePage extends AppCompatActivity {
 
         // Add the request to the request queue
         requestQueue.add(jsonArrayRequest);
+    }
+
+
+    private void getSessionData(){
+        // Access SharedPreferences
+        SharedPreferences prf = getSharedPreferences("session", MODE_PRIVATE);
+        String id = prf.getString("id", null);
+        String name = prf.getString("name", null);
+        String email = prf.getString("email", null);
+
+        Toast.makeText(this, "Welcome : " + name, Toast.LENGTH_SHORT).show();
     }
 }

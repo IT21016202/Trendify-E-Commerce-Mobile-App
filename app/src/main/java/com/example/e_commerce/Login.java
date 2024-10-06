@@ -2,6 +2,7 @@ package com.example.e_commerce;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -78,6 +79,20 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
+                        String id = response.optString("id", null);
+                        String name = response.optString("customerName", null);
+                        String email = response.optString("email", null);
+                        //String mobile = response.optString("customerName", null);
+
+                        SharedPreferences prf = getSharedPreferences("session", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prf.edit();
+
+                        editor.putString("id", id);
+                        editor.putString("name", name);
+                        editor.putString("email", email);
+                        editor.apply();
+
                         Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
                         gotToHome();
                     }
@@ -141,10 +156,10 @@ public class Login extends AppCompatActivity {
             txtLogPassword.setError("Fields Cannot be Empty !");
             return false;
         }
-        else if (!PASSWORD_PATTERN.matcher(userPassword).matches()){
-            txtLogPassword.setError("Password Must Contain Minimum 8 characters, At least One Digit and At least One Letter");
-            return false;
-        }
+//        else if (!PASSWORD_PATTERN.matcher(userPassword).matches()){
+//            txtLogPassword.setError("Password Must Contain Minimum 8 characters, At least One Digit and At least One Letter");
+//            return false;
+//        }
         else
             return true;
     }
