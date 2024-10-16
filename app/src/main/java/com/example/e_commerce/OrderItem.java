@@ -8,6 +8,13 @@ public class OrderItem {
     private int price;
     private String vendorId;
 
+    public OrderItem(String productId, String productName, int quantity, int price, String vendorId){
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+        this.vendorId = vendorId;
+    }
     // Getters and Setters for each field
     public String getProductId() { return productId; }
     public void setProductId(String productId) { this.productId = productId; }

@@ -12,6 +12,16 @@ public class Order {
     private int orderTotal;
     private List<OrderItem> orderItems;
 
+    public Order(String id, String userId, String shippingAddress, String status, String orderDate, int orderTotal, List<OrderItem> orderItems){
+        this.id = id;
+        this.userId = userId;
+        this.shippingAddress = shippingAddress;
+        this.status = status;
+        this.orderDate = orderDate;
+        this.orderTotal = orderTotal;
+        this.orderItems = orderItems;
+    }
+
     // Getters and Setters for each field
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
