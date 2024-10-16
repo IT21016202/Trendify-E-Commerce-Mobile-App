@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //checkSession();
+        checkSession();
 
         // Find the button by its ID
         loginbtn = findViewById(R.id.btnToLogin);

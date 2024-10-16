@@ -21,4 +21,13 @@
     <string name="mobile">Mobile Number</string>
     <string name="repassword">Re-Enter Password</string>
 
+    <!--Profile Page-->
+    <string name="logout">Logout</string>
+    <string name="orders">Orders</string>
+    <string name="wishlist">Wish List</string>
+    <string name="wallet">Wallet</string>
+
+    <!-- Orders Page-->
+    <string name="allorders">All Orders</string>
+
 </resources>
