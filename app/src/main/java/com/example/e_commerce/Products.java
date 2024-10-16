@@ -36,6 +36,7 @@ public class Products extends AppCompatActivity {
                     return true;
                 }
 
+
                 else if(itemId == R.id.nav_cart) {
                     intent = new Intent(Products.this, Cart.class);
                     startActivity(intent);

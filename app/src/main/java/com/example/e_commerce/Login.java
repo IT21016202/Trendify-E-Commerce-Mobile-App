@@ -85,9 +85,9 @@ public class Login extends AppCompatActivity {
                         String email = response.optString("email", null);
                         //String mobile = response.optString("customerName", null);
 
+                        //Save user session
                         SharedPreferences prf = getSharedPreferences("session", MODE_PRIVATE);
                         SharedPreferences.Editor editor = prf.edit();
-
                         editor.putString("id", id);
                         editor.putString("name", name);
                         editor.putString("email", email);
