@@ -85,7 +85,7 @@ public class Orders extends AppCompatActivity {
         String id = prf.getString("id", null);
 
         // URL of the API on your localhost
-        String url = "https://10.0.2.2:7022/api/Order/user/66fa28d3da5affbb2c3a51b3"; // Use 10.0.2.2 to access localhost in Android emulator
+        String url = "https://10.0.2.2:7022/api/Order/user/"+id; // Use 10.0.2.2 to access localhost in Android emulator
 
         // Create a request queue
         RequestQueue requestQueue = Volley.newRequestQueue(this);

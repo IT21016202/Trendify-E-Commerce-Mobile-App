@@ -30,13 +30,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
-        holder.textViewOrderId.setText("Order ID: " + order.getId());
+        holder.textViewOrderId.setText("Tracking Number: " + order.getId());
         holder.textViewStatus.setText("Status: " + order.getStatus());
         holder.textViewOrderDate.setText("Date: " + order.getOrderDate());
         holder.textViewShippingAddress.setText("Shipping Address: " + order.getShippingAddress());
         holder.textViewOrderTotal.setText("Total: $" + order.getOrderTotal());
 
         // Additional binding for order items can go here
+
     }
 
     @Override
