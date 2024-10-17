@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -46,11 +48,41 @@
             android:text="Order Total"
             android:textSize="12sp" />
 
+
+
         <!-- Nested RecyclerView for OrderItems -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewOrderItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/btnViewOrder"
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:text="View"
+                android:textSize="8sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnCancelOrder"
+                android:layout_width="83dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:text="Cancel Order"
+                android:textSize="8sp"
+                app:layout_constraintStart_toEndOf="@+id/btnViewOrder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,10 +30,14 @@ import java.util.List;
 
 public class Orders extends AppCompatActivity {
 
+    Button view, cancel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
+
+        cancel = findViewById(R.id.btnCancelOrder);
 
 
         fetchOrders();
@@ -98,7 +103,6 @@ public class Orders extends AppCompatActivity {
             new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
-                    Log.d("API Response", response.toString()); // Log the raw response
 
                     try {
                         List<Order> orderList = new ArrayList<>();
@@ -148,7 +152,7 @@ public class Orders extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     // Handle errors here
                     System.out.println(error);
-                    Toast.makeText(Orders.this, "Failed to retrieve data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Orders.this, "No orders to show", Toast.LENGTH_SHORT).show();
                 }
             }
         );
