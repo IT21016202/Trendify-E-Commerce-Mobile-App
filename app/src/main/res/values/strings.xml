@@ -30,4 +30,9 @@
     <!-- Orders Page-->
     <string name="allorders">All Orders</string>
 
+    <!-- Home-->
+    <string name="slogan">Endless Choices, Effortless Shopping!</string>
+    <string name="topselling">Top Selling Products</string>
+    <string name="newarrivals">New Arrivals</string>
+
 </resources>

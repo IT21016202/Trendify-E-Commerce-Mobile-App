@@ -3,6 +3,7 @@ package com.example.e_commerce;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class Profile extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logout();
+                showLogoutConfirmationDialog(); // Show confirmation dialog
             }
         });
 
@@ -99,8 +100,19 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    private void logout(){
-        //Save user session
+    private void showLogoutConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", (dialog, which) -> logout());
+        builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void logout() {
+        // Save user session
         SharedPreferences prf = getSharedPreferences("session", MODE_PRIVATE);
         SharedPreferences.Editor editor = prf.edit();
         editor.putString("id", null);
@@ -108,8 +120,8 @@ public class Profile extends AppCompatActivity {
         editor.putString("email", null);
         editor.apply();
 
-        Intent intent;
-        intent = new Intent(Profile.this, MainActivity.class);
+        Intent intent = new Intent(Profile.this, MainActivity.class);
         startActivity(intent);
+        finish(); // Optional: finish the Profile activity
     }
 }

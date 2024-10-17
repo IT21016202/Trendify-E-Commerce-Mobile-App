@@ -32,13 +32,13 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        textViewResult = findViewById(R.id.textViewResult);
+        //textViewResult = findViewById(R.id.textViewResult);
 
         // Trust all certificates for localhost development
-        SSLHelper.trustAllCertificates();
+        //SSLHelper.trustAllCertificates();
 
         // Make the API call
-        fetchJsonArrayData();
+        //fetchJsonArrayData();
 
         // Get Session Data
         getSessionData();
@@ -106,7 +106,7 @@ public class HomePage extends AppCompatActivity {
                                 result.append(name).append("\n");
                             }
                             // Display the result in the TextView
-                            textViewResult.setText(result.toString());
+                            //textViewResult.setText(result.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(HomePage.this, "JSON parsing error", Toast.LENGTH_SHORT).show();

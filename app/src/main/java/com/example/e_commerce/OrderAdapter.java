@@ -44,14 +44,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.textViewShippingAddress.setText("Shipping Address: " + order.getShippingAddress());
         holder.textViewOrderTotal.setText("Total: $" + order.getOrderTotal());
 
+        // Additional binding for order items can go here
+
         // Set the visibility of the cancel button based on order status
         if ("Pending".equals(order.getStatus())) {
             holder.btnCancelOrder.setVisibility(View.VISIBLE); // Show the button
         } else {
             holder.btnCancelOrder.setVisibility(View.GONE); // Hide the button
         }
-
-        // Additional binding for order items can go here
 
         // Set up click listener for the cancel button
         holder.btnCancelOrder.setOnClickListener(new View.OnClickListener() {
