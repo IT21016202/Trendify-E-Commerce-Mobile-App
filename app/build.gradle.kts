@@ -41,5 +41,7 @@ dependencies {
     implementation ("com.mikepenz:iconics-core:5.3.3")
     implementation ("com.mikepenz:google-material-typeface:3.0.1.5.original-kotlin@aar")
     implementation ("com.mikepenz:fontawesome-typeface:5.9.0.0-kotlin@aar")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
 }

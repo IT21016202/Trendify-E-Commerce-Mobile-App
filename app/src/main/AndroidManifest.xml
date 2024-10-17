@@ -16,6 +16,7 @@
         android:theme="@style/Theme.E_Commerce"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity android:name=".OrderFormActivity" />
         <activity
             android:name=".Orders"
             android:exported="false" />

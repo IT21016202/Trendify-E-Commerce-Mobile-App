@@ -10,6 +10,7 @@ import android.widget.Toast;
 import android.content.Intent;
 import android.util.Patterns;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -99,14 +100,33 @@ public class Register extends AppCompatActivity {
                         Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Register.this, "Registration failed ", Toast.LENGTH_LONG).show();
-                        error.printStackTrace();
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            String errorMessage = "Registration failed: ";
+                            if (error.networkResponse != null) {
+                                errorMessage += "Status code: " + error.networkResponse.statusCode;
+                            } else if (error instanceof com.android.volley.TimeoutError) {
+                                errorMessage += "Request timed out";
+                            } else if (error instanceof com.android.volley.NoConnectionError) {
+                                errorMessage += "No network connection";
+                            } else {
+                                errorMessage += error.getMessage();
+                            }
+                            Toast.makeText(Register.this, errorMessage, Toast.LENGTH_LONG).show();
+                            error.printStackTrace();
+                        }
                     }
-                }
             );
+
+            // Set a custom retry policy
+            int MY_SOCKET_TIMEOUT_MS = 15000; // 15 seconds
+            int MY_MAX_RETRIES = 1; // 1 retry
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    MY_SOCKET_TIMEOUT_MS,
+                    MY_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
 
             // Add the request to the Volley request queue
             RequestQueue requestQueue = Volley.newRequestQueue(this);
