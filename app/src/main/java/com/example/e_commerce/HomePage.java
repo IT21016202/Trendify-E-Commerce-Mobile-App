@@ -228,7 +228,8 @@ public class HomePage extends AppCompatActivity {
                                         productJson.getString("productName"),
                                         productJson.getString("productDescription"),
                                         productJson.getDouble("unitPrice"),  // unitPrice should be parsed as double
-                                        productJson.optString("image", "")  // Handle image which can be null or empty
+                                        productJson.optString("image", ""),  // Handle image which can be null or empty
+                                        productJson.getString("vendorId")
                                 );
                                 productList.add(product);
                             }
