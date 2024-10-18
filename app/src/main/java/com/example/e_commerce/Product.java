@@ -29,4 +29,7 @@ public class Product {
     public String getVendorId() {
         return vendor_id;
     }
+
+    public void setQuantity(int quantity) {
+    }
 }

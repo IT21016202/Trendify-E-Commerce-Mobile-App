@@ -263,25 +263,27 @@ public class HomePage extends AppCompatActivity {
 
     private void setupBottomNavigation() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setSelectedItemId(R.id.nav_cart);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Intent intent;
             int itemId = item.getItemId();
 
             if (itemId == R.id.nav_home) {
-                return true;
+                intent = new Intent(HomePage.this, HomePage.class); // Update context here
             } else if (itemId == R.id.nav_products) {
-                intent = new Intent(HomePage.this, Products.class);
+                intent = new Intent(HomePage.this, Products.class); // Update context here
             } else if (itemId == R.id.nav_cart) {
-                intent = new Intent(HomePage.this, Cart.class);
+                return true; // Already on the cart page
             } else if (itemId == R.id.nav_profile) {
-                intent = new Intent(HomePage.this, Profile.class);
+                intent = new Intent(HomePage.this, Profile.class); // Update context here
             } else {
                 return false;
             }
 
             startActivity(intent);
+            finish(); // Finish current activity to prevent going back to it
             return true;
         });
     }
+
 }
