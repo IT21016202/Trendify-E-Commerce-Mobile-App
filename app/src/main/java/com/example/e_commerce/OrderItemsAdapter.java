@@ -93,6 +93,7 @@ public class OrderItemsAdapter extends RecyclerView.Adapter<OrderItemsAdapter.Vi
                         // Create a JSON object for the request body
                         JSONObject jsonBody = new JSONObject();
                         try {
+                            //jsonBody.put("Id", null);
                             jsonBody.put("vendorId", vendorId);
                             jsonBody.put("customerId", userId);
                             jsonBody.put("productId", productId);
@@ -122,12 +123,12 @@ public class OrderItemsAdapter extends RecyclerView.Adapter<OrderItemsAdapter.Vi
                                 new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(context, "Rating adding failed ", Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(context, "Rating adding failed ", Toast.LENGTH_LONG).show();
                                         //error.printStackTrace();
                                         if (error.networkResponse != null) {
                                             String responseData = new String(error.networkResponse.data);
                                             System.out.println("Error Response: " + responseData);
-                                            Toast.makeText(context, "Error: " + responseData, Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(context, "Error: " + responseData, Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }
@@ -138,7 +139,7 @@ public class OrderItemsAdapter extends RecyclerView.Adapter<OrderItemsAdapter.Vi
                         requestQueue.add(jsonObjectRequest);
 
                         // Do something with the rating (e.g., submit to API, show a Toast, etc.)
-                        Toast.makeText(context, "Rating: " + rating, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Rating: " + rating + " | Review added successfully !", Toast.LENGTH_SHORT).show();
 
                         // Close the dialog
                         dialog.dismiss();
