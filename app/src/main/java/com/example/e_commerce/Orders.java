@@ -37,11 +37,12 @@ public class Orders extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
 
-        cancel = findViewById(R.id.btnCancelOrder);
+        //cancel = findViewById(R.id.btnCancelOrder);
+        //view = findViewById(R.id.btnViewOrder)
 
-
+        // Trust all certificates for localhost development
+        SSLHelper.trustAllCertificates();
         fetchOrders();
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile); // Highlight 'Home' item

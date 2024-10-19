@@ -2,6 +2,7 @@ package com.example.e_commerce;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 showCancelConfirmation(order.getId());
             }
         });
+
+        holder.btnViewOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderDetails.class);
+                intent.putExtra("ORDER_ID", order.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -69,7 +79,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        Button btnCancelOrder;
+        Button btnCancelOrder, btnViewOrder;
         TextView textViewOrderId, textViewStatus, textViewOrderDate, textViewShippingAddress, textViewOrderTotal;
 
         public OrderViewHolder(View itemView) {
@@ -79,7 +89,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             textViewOrderDate = itemView.findViewById(R.id.textViewOrderDate);
             textViewShippingAddress = itemView.findViewById(R.id.textViewShippingAddress);
             textViewOrderTotal = itemView.findViewById(R.id.textViewOrderTotal);
+
             btnCancelOrder = itemView.findViewById(R.id.btnCancelOrder);
+            btnViewOrder = itemView.findViewById(R.id.btnViewOrder);
         }
     }
 
