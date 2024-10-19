@@ -206,7 +206,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     private void fetchProducts() {
-        String url = "https://10.0.2.2:7022/api/Product/getAllProducts"; // Adjust the URL for your local development environment
+        String url = "https://10.0.2.2:7022/api/Product/getapprovedproducts"; // Adjust the URL for your local development environment
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -263,27 +263,25 @@ public class HomePage extends AppCompatActivity {
 
     private void setupBottomNavigation() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_cart);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Intent intent;
             int itemId = item.getItemId();
 
             if (itemId == R.id.nav_home) {
-                intent = new Intent(HomePage.this, HomePage.class); // Update context here
+                return true;
             } else if (itemId == R.id.nav_products) {
-                intent = new Intent(HomePage.this, Products.class); // Update context here
+                intent = new Intent(HomePage.this, Products.class);
             } else if (itemId == R.id.nav_cart) {
-                return true; // Already on the cart page
+                intent = new Intent(HomePage.this, Cart.class);
             } else if (itemId == R.id.nav_profile) {
-                intent = new Intent(HomePage.this, Profile.class); // Update context here
+                intent = new Intent(HomePage.this, Profile.class);
             } else {
                 return false;
             }
 
             startActivity(intent);
-            finish(); // Finish current activity to prevent going back to it
             return true;
         });
     }
-
 }

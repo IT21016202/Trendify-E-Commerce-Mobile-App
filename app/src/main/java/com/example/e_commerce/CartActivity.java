@@ -1,5 +1,6 @@
 package com.example.e_commerce;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,5 +97,32 @@ public class CartActivity extends AppCompatActivity {
         if (requestQueue != null) {
             requestQueue.cancelAll(this);
         }
+    }
+
+
+    private void setupBottomNavigation() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_cart); // Set cart as selected item
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            Intent intent;
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.nav_home) {
+                intent = new Intent(CartActivity.this, HomePage.class);
+            } else if (itemId == R.id.nav_products) {
+                intent = new Intent(CartActivity.this, Products.class);
+            } else if (itemId == R.id.nav_cart) {
+                return true; // Already on the cart page
+            } else if (itemId == R.id.nav_profile) {
+                intent = new Intent(CartActivity.this, Profile.class);
+            } else {
+                return false;
+            }
+
+            startActivity(intent);
+            finish(); // Finish current activity to prevent going back to it
+            return true;
+        });
     }
 }
